@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="robots" content="noindex">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="./assets/reset.css">
+	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="shortcut icon" href="./favicon.ico">
+	<title>Are you exists?</title>
+</head>
+<body>
+	<div class="container">
+		<p>Please Enter code.</p>
+		<div class="sugoi">
+			<input class="nice-textbox" type="text" id="message"/>
+		</div>
+		
+		<input type="button" value="Submit" class="btn" onclick="siraberu()">
+	</div>
+	<script>
+		'use strict';
+		var hash="d9c7b963a2c25808d99337ef0731dfc0e8f68abf541c600804e22c5677ed79fe";
+		var nyuuryoku = "";
+		var atai = "";
+		async function sha256(text){
+    var uint8  = new TextEncoder().encode(text)
+    var digest = await crypto.subtle.digest('SHA-256', uint8)
+    return Array.from(new Uint8Array(digest)).map(v => v.toString(16).padStart(2,'0')).join('')
+		}	
+		function siraberu() {
+			nyuuryoku = document.getElementById("message").value;
+			var waitAsynchronousFunc = (async() => {
+    atai = await sha256(nyuuryoku);
+		if (atai == hash) {
+				window.location.href = "https://drive.google.com/drive/folders/1RPhLxf9WzcfdfaiLQ__ZsTWmBIysMr-t?usp=sharing";
+			} else {
+				document.getElementById("message").value = "";
+			}
+	})();
+
+		} 
+	</script>
+</body>
+</html>
